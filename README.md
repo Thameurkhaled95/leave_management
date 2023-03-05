@@ -6,6 +6,7 @@ To run this project follow this steps:
 ```
 $ php bin/console composer:install
 $ npm install
+$ create and migrate database
 $ php bin/console doctrine:fixtures:load
 $ npm run watch
 $ run the server
