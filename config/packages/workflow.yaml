@@ -1,0 +1,25 @@
+framework:
+    workflows:
+        leave_request:
+            type: 'state_machine'
+            marking_store:
+                 type: 'method'
+                 property: 'status'
+            supports:
+                - App\Entity\Conge
+            initial_marking: attente
+            places:
+                - attente
+                - approuvé
+                - refusé
+            # events_to_dispatch: ['workflow.enter']
+            transitions:
+                to_accept:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: attente
+                    to: approuvé
+                to_reject:
+                    guard: "is_granted('ROLE_ADMIN')"
+                    from: attente
+                    to: refusé
+

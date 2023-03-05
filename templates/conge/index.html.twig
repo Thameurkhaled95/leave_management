@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Congés
+{% endblock %}
+
+{% block body %}
+	<h1>Congés</h1>
+	{# read and display all flash messages #}
+	{% for label, messages in app.flashes %}
+		{% for message in messages %}
+			<div class="flash-{{ label }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date_debut</th>
+				<th>Date_fin</th>
+				<th>Status</th>
+				<th>Commentaire</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for conge in conges %}
+				<tr>
+					<td>{{ conge.dateDebut ? conge.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ conge.dateFin ? conge.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ conge.status }}</td>
+					<td>{{ conge.commentaire }}</td>
+					<td class="d-flex">
+						<a  href="{{ path('app_conge_show', {'id': conge.id}) }}"><i class="gg-eye"></i></a>
+                        {% if is_granted('edit', conge) %}
+						    <a href="{{ path('app_conge_edit', {'id': conge.id}) }}"><i class="fas fa-edit"></i></a>
+						{% endif %}
+						{% if workflow_can(conge, 'to_accept') and is_granted('stats', conge)  %}
+							<form method="post" action="{{ path('app_conge_accept_reject', {'id': conge.id, 'accept': 1}) }}">
+								<input type="hidden" name="_token" value="{{ csrf_token('stats' ~ conge.id) }}">
+								<button class="btn btn-icon btn-success"><i class="gg-check"></i></button>
+							</form>
+						{% endif %}
+						{% if workflow_can(conge, 'to_reject') and is_granted('stats', conge)  %}
+							<form method="post" action="{{ path('app_conge_accept_reject', {'id': conge.id, 'accept': 0}) }}">
+								<input type="hidden" name="_token" value="{{ csrf_token('stats' ~ conge.id) }}">
+								<button class="btn btn-icon btn-error"> <i class="fa fa-close"></i></button>
+							</form>
+						{% endif %}
+                        
+						{{ include('conge/_delete_form.html.twig') }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no congés</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+    {# this a new twig function in src/Twig/AppExtension #}
+    {# {% if workflow_user_can('submit') %} #}
+	    <a class="new" href="{{ path('app_conge_new') }}">Demande de congé</a>
+    {# {% endif %} #}
+{% endblock %}

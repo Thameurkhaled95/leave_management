@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}employes {% endblock %}
+
+{% block body %}
+    <h1>employes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employe in employes %}
+            <tr>
+                <td>{{ employe.id }}</td>
+                <td>{{ employe.email }}</td>
+                <td>{{ employe.nom}}</td>
+                <td class="d-flex">
+                    <a href="{{ path('app_employe_show', {'id': employe.id}) }}"><i class="gg-eye"></i></a>
+                    <a href="{{ path('app_employe_edit', {'id': employe.id}) }}"><i class="fas fa-edit"></i></a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_conge_index', {'email': employe.email}) }}">list de congés</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
