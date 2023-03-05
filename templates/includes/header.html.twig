@@ -1,0 +1,9 @@
+ <div class="header">
+  <div class="header-right">
+    <a href="{{ path('app_conge_index') }}">Congés</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('app_employe_index') }}">Employes</a>
+    {% endif %}
+    <a href="{{ path('app_logout') }}">logout</a>
+  </div>
+</div> 
