@@ -1,12 +1,15 @@
 # leave_management
 
-## follow this steps to run this project
+## Setup
+To run this project follow this steps:
+
 ```
 $ php bin/console composer:install
 $ npm install
 $ php bin/console doctrine:fixtures:load
 $ npm run watch
 $ run the server
+
 ```
 ## Some Description:
 
