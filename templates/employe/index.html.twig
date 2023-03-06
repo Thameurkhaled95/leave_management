@@ -22,8 +22,8 @@
                 <td>{{ employe.nom}}</td>
                 <td class="d-flex">
                     <a href="{{ path('app_employe_show', {'id': employe.id}) }}"><i class="gg-eye"></i></a>
-                    <a href="{{ path('app_employe_edit', {'id': employe.id}) }}"><i class="fas fa-edit"></i></a>
                     {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_employe_edit', {'id': employe.id}) }}"><i class="fas fa-edit"></i></a>
                         <a href="{{ path('app_conge_index', {'email': employe.email}) }}">list de congés</a>
                     {% endif %}
                 </td>
