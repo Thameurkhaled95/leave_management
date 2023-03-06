@@ -16,3 +16,10 @@ $ run the server
 
 * this project use (webpack Encore Bundle) and (symfony workflow) to mange stats in "Conge" Entity with "CongeWorkflow" Service
 * the main conntroller are Accout and Conge Controller
+
+## How to connect:
+Connect using the following account with password 'adminadmin':
+
+* admin@gmail.com
+* thameur@gmail.com
+* khaled@gmail.com

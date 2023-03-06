@@ -25,6 +25,7 @@ class AccountController extends AbstractController
     #[Route('/list', name: 'app_employe_index', methods: ['GET'])]
     public function index(EmployeRepository $employeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('employe/index.html.twig', [
             'employes' => $employeRepository->findAll(),
         ]);
@@ -33,6 +34,7 @@ class AccountController extends AbstractController
     #[Route('/{id}/edit', name: 'app_employe_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Employe $employe, EmployeRepository $employeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(EmployeType::class, $employe);
         $form->handleRequest($request);
 
@@ -51,6 +53,7 @@ class AccountController extends AbstractController
     #[Route('/{id}', name: 'app_employe_delete', methods: ['POST'])]
     public function delete(Request $request, Employe $employe, EmployeRepository $employeRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete'.$employe->getId(), $request->request->get('_token'))) {
             $employeRepository->remove($employe, true);
         }

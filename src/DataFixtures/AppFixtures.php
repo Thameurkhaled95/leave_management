@@ -12,16 +12,16 @@ class AppFixtures extends Fixture
 {
     protected static $users = [
         [
-            "email"=>"admin@smart-team.tn",
+            "email"=>"admin@gmail.com",
             "nom"=>"admin",
             "is_admin"=>true
         ], 
         [
-            "email"=>"thameur@smart-team.tn",
+            "email"=>"thameur@gmail.com",
             "nom"=>"thameur"
         ], 
         [
-            "email"=>"khaled@smart-team.tn",
+            "email"=>"khaled@gmail.com",
             "nom"=>"khaled"
         ]
     ];
